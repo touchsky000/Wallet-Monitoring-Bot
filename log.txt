@@ -1,0 +1,2 @@
+[2025-03-19T06:38:39.203Z] ❌ Transaction Failed! Signature: 239JixVCaR3p2fcDYjH6F3b19UxafeUyTTh8yaQQgjh4GhmuWmoV31m8BBnVN8pmniPCEdR97tuZJ3c6rkhNKkjT
+[2025-03-19T06:38:39.203Z] [object Object]

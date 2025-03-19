@@ -38,11 +38,11 @@ const checkRecentTransaction = async (walletAddress) => {
             }
             // console.log("latest transaction =>", transactionDetails)
             if (transactionDetails.meta && transactionDetails.meta.err === null) {
-                console.log(`✅ Transaction Successful! Signature: ${latestSignature}`);
+                console.log(`\x1b[32m✔\x1b[0m Transaction Successful! Signature: ${latestSignature}`);
             } else {
-                console.log(`❌ Transaction Failed! Signature: ${latestSignature}`, transactionDetails.meta);
+                console.log(`❌ Transaction Failed! Signature: ${latestSignature}`, transactionDetails.meta.postTokenBalances[0].mint);
                 writeLog(`❌ Transaction Failed! Signature: ${latestSignature}`)
-                writeLog(transactionDetails)
+                writeLog("token => ", transactionDetails.meta.postTokenBalances[0].mint)
             }
             
         } catch (error) {
