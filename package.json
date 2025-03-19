@@ -1,5 +1,24 @@
 {
   "dependencies": {
-    "@solana/web3.js": "^1.98.0"
-  }
+    "@solana/web3.js": "^1.98.0",
+    "nodemon": "^3.1.9"
+  },
+  "name": "wallet_monitoring",
+  "version": "1.0.0",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "start": "nodemon index.js"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/touchsky000/Wallet-Monitoring-Bot.git"
+  },
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/touchsky000/Wallet-Monitoring-Bot/issues"
+  },
+  "homepage": "https://github.com/touchsky000/Wallet-Monitoring-Bot#readme",
+  "description": ""
 }
