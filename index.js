@@ -35,22 +35,43 @@ const checkRecentTransaction = async (walletAddress) => {
         const latestSignature = signatures[0].signature;
         const transactionDetails = await connection.getTransaction(
             latestSignature, {
-                commitment: "confirmed",
-                maxSupportedTransactionVersion: 0,
-            });
+            commitment: "confirmed",
+            maxSupportedTransactionVersion: 0,
+        });
 
         if (!transactionDetails) {
             console.log("Transaction not found.");
             return;
         }
         if (transactionDetails.meta && transactionDetails.meta.err === null) {
-            console.log(`\x1b[32m✔\x1b[0m Transaction Successful! Signature: ${latestSignature}`);
-            // writeLog(`\x1b[32m✔\x1b[0m Transaction Successful! Signature: ${latestSignature}`)
-            // writeLog(transactionDetails.meta.postTokenBalances[0].mint)
+            const { postTokenBalances, preTokenBalances } = transactionDetails.meta
+
+            if (postTokenBalances[0].mint == "So11111111111111111111111111111111111111112") {
+                console.log(`\x1b[32m✔\x1b[0m Buy Signature: ${latestSignature}`);
+                writeLog(`Buy Signature: ${latestSignature}`);
+            }
+            else {
+                console.log(`\x1b[32m✔\x1b[0m Sell Signature: ${latestSignature}`);
+                writeLog(`Sell Signature: ${latestSignature}`);
+            }
+
+            for (let i = 0; i < 2; i++) {
+                console.log(postTokenBalances[i].mint)
+                writeLog(postTokenBalances[i].mint)
+                console.log(postTokenBalances[i].uiTokenAmount.uiAmount - preTokenBalances[i].uiTokenAmount.uiAmount)
+                writeLog(postTokenBalances[i].uiTokenAmount.uiAmount - preTokenBalances[i].uiTokenAmount.uiAmount)
+            }
         } else {
             console.log(`❌ Transaction Failed! Signature: ${latestSignature}`);
             await writeLog(`❌ Transaction Failed! Signature: ${latestSignature}`)
-            await writeLog(`token => ${transactionDetails.meta.postTokenBalances[0].mint}`)
+            // await writeLog(`token => ${transactionDetails.meta.postTokenBalances[0].mint}`)
+            const { postTokenBalances, preTokenBalances } = transactionDetails.meta
+            for (let i = 0; i < 2; i++) {
+                console.log(postTokenBalances[i].mint)
+                writeLog(postTokenBalances[i].mint)
+                console.log(postTokenBalances[i].uiTokenAmount.uiAmount - preTokenBalances[i].uiTokenAmount.uiAmount)
+                writeLog(postTokenBalances[i].uiTokenAmount.uiAmount - preTokenBalances[i].uiTokenAmount.uiAmount)
+            }
         }
 
     } catch (error) {
@@ -58,8 +79,8 @@ const checkRecentTransaction = async (walletAddress) => {
     }
 };
 
-// const WALLET_ADDRESS = new PublicKey("47Q5EGo2uxoXiDJBAj3Ur1v7XGY6e3b6Wnj9REKuAGnf");
-const WALLET_ADDRESS = new PublicKey("8npRzAb6SupcpSbnusPA1MMdAuizBoAWv4L6Tj1bwUoJ");
+const WALLET_ADDRESS = new PublicKey("47Q5EGo2uxoXiDJBAj3Ur1v7XGY6e3b6Wnj9REKuAGnf");
+// const WALLET_ADDRESS = new PublicKey("8npRzAb6SupcpSbnusPA1MMdAuizBoAWv4L6Tj1bwUoJ");
 connection.onAccountChange(WALLET_ADDRESS, async () => {
     console.log("Wallet Updated: Checking latest transaction...");
     await checkRecentTransaction(WALLET_ADDRESS);
