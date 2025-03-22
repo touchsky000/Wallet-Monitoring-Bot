@@ -16,5 +16,5 @@ const writeLog = (message) => {
 };
 
 // Example usage
-writeLog("This is a test log.");
+    console.log(performance.now(),"This is a test log.");
 writeLog("Another log entry.");
